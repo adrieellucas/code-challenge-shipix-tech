@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodbccst
+    ports:
+      - "1500:27017"
+    volumes:
+      - mongodb-data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=unccst
+      - MONGO_INITDB_ROOT_PASSWORD=PAunSSccWOstRD
+    restart: always
+
+volumes:
+  mongodb-data:

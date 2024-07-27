@@ -3,9 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { HttpModule } from '@nestjs/axios';
 import { OrderSchema } from './schemas/order.schema';
 import { OrderController } from './controllers/order.controller';
-import { OrderService } from './services/order.servce';
-import { ContactSchema } from './schemas/contact.schema';
-import { ItemSchema } from './schemas/item.schema';
+import { OrderService } from './services/order.service';
 
 @Module({
     imports: [
@@ -14,14 +12,6 @@ import { ItemSchema } from './schemas/item.schema';
             {
                 name: 'Order',
                 schema: OrderSchema,
-            },
-            {
-                name: 'Contact',
-                schema: ContactSchema,
-            },
-            {
-                name: 'Item',
-                schema: ItemSchema,
             },
         ])
     ],

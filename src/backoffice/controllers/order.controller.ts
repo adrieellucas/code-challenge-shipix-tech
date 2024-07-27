@@ -1,5 +1,5 @@
 import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Put, UseInterceptors } from "@nestjs/common";
-import { OrderService } from "../services/order.servce";
+import { OrderService } from "../services/order.service";
 import { Result } from "../models/result.model";
 import { CreateUpdateCustomerDto } from "../dtos/create-update-order.dto";
 import { CreateUpdateOrderContract } from "../contracts/order/create-update-order.contract";
@@ -15,6 +15,16 @@ export class OrderController {
     async loadFromIntegration() {
         try {
             const respose = await this.orderService.loadFromIntegration();
+            return new Result(null, true, respose, null);
+        } catch (error) {
+            throw new HttpException(new Result(null, false, null, error), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Post('taskForLoadFromIntegration')
+    async taskForLoadFromIntegration() {
+        try {
+            const respose = await this.orderService.taskForLoadFromIntegration();
             return new Result(null, true, respose, null);
         } catch (error) {
             throw new HttpException(new Result(null, false, null, error), HttpStatus.BAD_REQUEST);

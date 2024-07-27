@@ -4,7 +4,7 @@ import { CreateUpdateCustomerDto } from '../dtos/create-update-order.dto';
 import { Result } from '../models/result.model';
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { OrderType } from '../enums/order-type.enum';
-import { OrderService } from '../services/order.servce';
+import { OrderService } from '../services/order.service';
 
 describe('OrderController', () => {
     let controller: OrderController;

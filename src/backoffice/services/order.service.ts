@@ -12,11 +12,25 @@ export class OrderService {
     ) { }
 
     async loadFromIntegration(): Promise<Order[]> {
-        console.log(process.env.LOAD_ORDERS);
         const response = await lastValueFrom(this.httpService.get<Order[]>(process.env.LOAD_ORDERS));
         const data = response.data;
 
         return await this.model.insertMany(data);
+    }
+
+    async taskForLoadFromIntegration() {
+        const response = await lastValueFrom(this.httpService.get<Order[]>(process.env.LOAD_ORDERS));
+        const data = response.data;
+
+        const bulkOps = data.map(order => ({
+            updateOne: {
+                filter: { id: order.id },
+                update: order,
+                upsert: true,
+            },
+        }));
+
+        return await this.model.bulkWrite(bulkOps);
     }
 
     async create(data: CreateUpdateCustomerDto): Promise<Order> {
