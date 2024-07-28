@@ -50,8 +50,8 @@ export class OrderController {
     @UseInterceptors(new ValidatorInterceptor(new CreateUpdateOrderContract()))
     async update(@Param('id') id: string, @Body() model: CreateUpdateCustomerDto) {
         try {
-            await this.orderService.update(id, model);
-            return new Result(null, true, model, null);
+            const respose = await this.orderService.update(id, model);
+            return new Result(null, true, respose, null);
         } catch (error) {
             throw new HttpException(new Result(null, false, null, error), HttpStatus.BAD_REQUEST);
         }
@@ -60,8 +60,8 @@ export class OrderController {
     @Get(':id')
     async get(@Param('id') id: string) {
         try {
-            const order = await this.orderService.get(id);
-            return new Result(null, true, order, null);
+            const respose = await this.orderService.get(id);
+            return new Result(null, true, respose, null);
         } catch (error) {
             throw new HttpException(new Result(null, false, null, error), HttpStatus.BAD_REQUEST);
         }
@@ -70,8 +70,8 @@ export class OrderController {
     @Get()
     async getAll() {
         try {
-            const orders = await this.orderService.getAll();
-            return new Result(null, true, orders, null);
+            const respose = await this.orderService.getAll();
+            return new Result(null, true, respose, null);
         } catch (error) {
             throw new HttpException(new Result(null, false, null, error), HttpStatus.BAD_REQUEST);
         }

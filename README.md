@@ -75,9 +75,10 @@ Difference between `taskForLoadFromIntegration` and `loadFromIntegration`:
 
 ## Features
 
-* Improve the tests
+* Improve the tests (tests was created by chatgpt and reviewed by me)
 * Use @nestjs/bullmq to call taskForLoadFromIntegration 
 * Create a JWT authentication
+* Separete services files into repository folder
 
 ## MongoDB
 
@@ -88,19 +89,19 @@ Install and configure MongoDB for windows:
 4. Start or stop mongo container
 
 ```bash
-#get mongo image
+# get mongo image
 $ docker pull mongo
 
-#create mongo container with user and password
+# create mongo container with user and password
 $ docker run -v ~/docker --name mongodbccst -d -p 1500:27017 -e MONGO_INITDB_ROOT_USERNAME=unccst -e MONGO_INITDB_ROOT_PASSWORD=PAunSSccWOstRD mongo
 
-#start container
+# start container
 $ docker container start mongodbccst
 
-#stop container
+# stop container
 $ docker container stop mongodbccst
 ```
 
-In the example above the connenction string is: `mongodb://unccst:PAunSSccWOstRD@localhost:1500/admin`
+In the example above, the connenction string is: `mongodb://unccst:PAunSSccWOstRD@localhost:1500/admin`
 
 ##
