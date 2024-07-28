@@ -6,7 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    MongooseModule.forRoot(process.env.CONNECTION_STRING || 'mongodb://mongoadriel:euhru334@localhost:1500/admin'),
+    MongooseModule.forRoot(process.env.CONNECTION_STRING || 'mongodb://unccst:PAunSSccWOstRD@localhost:1500/admin'),
     BackofficeModule
   ],
   controllers: [],
