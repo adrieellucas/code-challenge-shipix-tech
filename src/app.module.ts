@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { BackofficeModule } from './backoffice/backoffice.module';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { BackofficeModule } from './backoffice/backoffice.module';
 
 @Module({
   imports: [

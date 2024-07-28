@@ -11,7 +11,4 @@ npm install
 echo "------------ Starting docker compose services"
 docker-compose up -d
 
-echo "------------ Starting application"
-npm run start:dev
-
 echo "------------ Config ok!"

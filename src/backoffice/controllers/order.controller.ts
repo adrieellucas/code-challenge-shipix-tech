@@ -4,6 +4,7 @@ import { Result } from "../models/result.model";
 import { CreateUpdateCustomerDto } from "../dtos/create-update-order.dto";
 import { CreateUpdateOrderContract } from "../contracts/order/create-update-order.contract";
 import { ValidatorInterceptor } from "src/interceptors/validator.interceptor";
+import { ApiOperation } from "@nestjs/swagger";
 
 @Controller('v1/orders')
 export class OrderController {
@@ -12,6 +13,7 @@ export class OrderController {
     ) { }
 
     @Post('loadFromIntegration')
+    @ApiOperation({ summary: 'Just save', description: 'This endpoint will always save the data' })
     async loadFromIntegration() {
         try {
             const respose = await this.orderService.loadFromIntegration();
@@ -22,6 +24,7 @@ export class OrderController {
     }
 
     @Post('taskForLoadFromIntegration')
+    @ApiOperation({ summary: 'Save if not exists or update', description: 'This endpoint save the data if not exists the id or update if exists the id' })
     async taskForLoadFromIntegration() {
         try {
             const respose = await this.orderService.taskForLoadFromIntegration();
@@ -56,13 +59,21 @@ export class OrderController {
 
     @Get(':id')
     async get(@Param('id') id: string) {
-        const order = await this.orderService.get(id);
-        return new Result(null, true, order, null);
+        try {
+            const order = await this.orderService.get(id);
+            return new Result(null, true, order, null);
+        } catch (error) {
+            throw new HttpException(new Result(null, false, null, error), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Get()
     async getAll() {
-        const orders = await this.orderService.getAll();
-        return new Result(null, true, orders, null);
+        try {
+            const orders = await this.orderService.getAll();
+            return new Result(null, true, orders, null);
+        } catch (error) {
+            throw new HttpException(new Result(null, false, null, error), HttpStatus.BAD_REQUEST);
+        }
     }
 }

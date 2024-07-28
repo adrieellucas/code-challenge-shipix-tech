@@ -11,6 +11,7 @@ export class OrderService {
         private readonly httpService: HttpService,
     ) { }
 
+    //just save in database
     async loadFromIntegration(): Promise<Order[]> {
         const response = await lastValueFrom(this.httpService.get<Order[]>(process.env.LOAD_ORDERS));
         const data = response.data;
@@ -18,6 +19,7 @@ export class OrderService {
         return await this.model.insertMany(data);
     }
 
+    //save if not exists or update (can be use from job, bullmq, etc...)
     async taskForLoadFromIntegration() {
         const response = await lastValueFrom(this.httpService.get<Order[]>(process.env.LOAD_ORDERS));
         const data = response.data;
